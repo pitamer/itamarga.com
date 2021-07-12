@@ -1,12 +1,12 @@
 <script>
     import Item from './Item.svelte';
 
-    let isTilted = false;
+    let isTilted = true;
     const toggleTilt = () => isTilted = !isTilted;
 </script>
 
 <main>
-    <div class="App" onClick={toggleTilt}>
+    <div class="App" on:click={toggleTilt}>
         <div class={`line top-line ${isTilted ? 'tilted' : ''}`}>
         </div>
         <div class="title-container">
@@ -28,7 +28,6 @@
                 <Item name={'Experience'}/>
                 <Item name={'Blog'}/>
                 <Item name={'Contact'}/>
-                <!--				Or just "Email"?-->
             </div>
             <div class={'items-container-row bottom-row'}>
                 <Item name={'LinkedIn'}/>
@@ -42,24 +41,120 @@
     </div>
 </main>
 
-<style>
-    main {
-        text-align: center;
-        padding: 1em;
-        max-width: 240px;
-        margin: 0 auto;
-    }
+<style lang="scss">
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    h1 {
-        color: #ff3e00;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
+  .App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #000;
 
-    @media (min-width: 640px) {
-        main {
-            max-width: none;
+    .line {
+      background-color: #39d353; // # var
+      width: 110%;
+      height: 60px;
+      transition: 0.5s linear;
+
+      &.top-line {
+        margin-top: -10px;
+      }
+
+      &.bottom-line {
+        margin-bottom: -10px;
+      }
+
+      &.tilted {
+        transform: rotate(1.8deg);
+        transition: 0.5s ease-out;
+
+        &.top-line {
+          margin-top: -30px;
         }
+
+        &.bottom-line {
+          margin-bottom: -30px;
+        }
+      }
     }
+
+    .title-container {
+      display: flex;
+      flex-flow: column;
+      place-items: center;
+
+      .title-logo {
+        border: 1px white solid;
+        width: 175px;
+        height: 175px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+      }
+
+      .title-text {
+        display: flex;
+        flex-flow: column;
+
+        .title-text-top-row {
+          font-size: 40px;
+          margin: 10px 0;
+        }
+
+        .title-text-bottom-row {
+          font-size: 30px;
+          margin: 10px 0;
+        }
+      }
+    }
+
+    .items-container {
+      display: flex;
+      flex-flow: column;
+
+      .items-container-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+      }
+    }
+  }
+
+  //main { // # Needed?
+  //  width: 100%;
+  //  height: 100%;
+  //  margin: 0 auto;
+  //  background-color: #000;
+  //}
+
+  //h1 { // # Cool! but DELETE
+  //  color: black;
+  //  text-shadow:
+  //          0     0     white,
+  //          1px   1px   white,
+  //          1px   0     white,
+  //          0     1px   white,
+  //          -1px  -1px  white,
+  //          -1px  0     white,
+  //          -1px  1px   white,
+  //          0     -1px  white,
+  //          1px   -1px  white;
+  //}
+
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
 </style>
