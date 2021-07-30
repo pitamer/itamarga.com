@@ -1,8 +1,21 @@
 <script>
-    import Item from './Item.svelte';
+    import Item from './Item.svelte'
 
-    let isTilted = true;
-    const toggleTilt = () => isTilted = !isTilted;
+    let isTilted = true
+    const toggleTilt = () => isTilted = !isTilted
+
+    let uid = 1
+
+    let menuItems = [
+        {id: uid++, isSelectable: true, isSelected: false, name: 'About me'},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Experience'},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Blog'},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Contact'},
+        {id: uid++, isSelectable: false, name: 'LinkedIn'},
+        {id: uid++, isSelectable: false, name: 'Twitter'},
+        {id: uid++, isSelectable: false, name: 'StackOverflow'},
+        {id: uid++, isSelectable: false, name: 'Github'},
+    ]
 </script>
 
 <main>
@@ -24,16 +37,14 @@
         </div>
         <div class="items-container">
             <div class="items-container-row top-row">
-                <Item name={'About me'}/>
-                <Item name={'Experience'}/>
-                <Item name={'Blog'}/>
-                <Item name={'Contact'}/>
+                {#each menuItems.filter(item => item.isSelectable) as {id, name}}
+                    <Item name={name}/>
+                {/each}
             </div>
-            <div class={'items-container-row bottom-row'}>
-                <Item name={'LinkedIn'}/>
-                <Item name={'Twitter'}/>
-                <Item name={'StackOverflow'}/>
-                <Item name={'Github'}/>
+            <div class="items-container-row bottom-row">
+                {#each menuItems.filter(item => !item.isSelectable) as {id, name}}
+                    <Item name={name}/>
+                {/each}
             </div>
         </div>
         <div class={`line bottom-line ${isTilted ? 'tilted' : ''}`}>
@@ -49,6 +60,7 @@
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
   }
 
   .App {
@@ -57,7 +69,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    overflow: hidden;
     margin: 0 auto;
     background-color: #000;
 
@@ -65,7 +76,7 @@
       background-color: #39d353; // # var
       width: 110%;
       height: 60px;
-      transition: 0.5s linear;
+      transition: 0.75s ease-out;
 
       &.top-line {
         margin-top: -10px;
@@ -76,8 +87,10 @@
       }
 
       &.tilted {
+        // # TODO: Re-implement with transform only, according
+        //  to the user's screen width, without using margins;
         transform: rotate(1.8deg);
-        transition: 0.5s ease-out;
+        transition: 0.75s ease-out;
 
         &.top-line {
           margin-top: -30px;
@@ -96,6 +109,7 @@
 
       .title-logo {
         border: 1px white solid;
+        background-color: #223;
         width: 175px;
         height: 175px;
         border-radius: 50%;
@@ -131,26 +145,13 @@
     }
   }
 
-  //main { // # Needed?
-  //  width: 100%;
-  //  height: 100%;
-  //  margin: 0 auto;
-  //  background-color: #000;
-  //}
-
-  //h1 { // # Cool! but DELETE
-  //  color: black;
-  //  text-shadow:
-  //          0     0     white,
-  //          1px   1px   white,
-  //          1px   0     white,
-  //          0     1px   white,
-  //          -1px  -1px  white,
-  //          -1px  0     white,
-  //          -1px  1px   white,
-  //          0     -1px  white,
-  //          1px   -1px  white;
-  //}
+  main {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #000;
+    overflow: hidden;
+  }
 
   @media (min-width: 640px) {
     main {
