@@ -53,16 +53,6 @@
 </main>
 
 <style lang="scss">
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow: hidden;
-  }
-
   .App {
     min-height: 100vh;
     display: flex;
@@ -74,30 +64,21 @@
 
     .line {
       background-color: #39d353; // # var
-      width: 110%;
-      height: 60px;
-      transition: 0.75s ease-out;
-
-      &.top-line {
-        margin-top: -10px;
-      }
-
-      &.bottom-line {
-        margin-bottom: -10px;
-      }
+      width: 100%;
+      height: 75px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      transition: 0.75s ease-out; // # var
 
       &.tilted {
-        // # TODO: Re-implement with transform only, according
-        //  to the user's screen width, without using margins;
-        transform: rotate(1.8deg);
-        transition: 0.75s ease-out;
+        transition: 0.75s ease-out; // # var
+        height: 100px;
 
         &.top-line {
-          margin-top: -30px;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
         }
 
         &.bottom-line {
-          margin-bottom: -30px;
+          clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
         }
       }
     }
@@ -150,7 +131,6 @@
     height: 100%;
     margin: 0 auto;
     background-color: #000;
-    overflow: hidden;
   }
 
   @media (min-width: 640px) {
