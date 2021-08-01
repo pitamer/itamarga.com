@@ -1,8 +1,17 @@
 <script lang="ts">
+    import {fade, crossfade} from 'svelte/transition';
+    const [send, receive] = crossfade({duration: d => Math.sqrt(d * 200)});
+
     export let name: string;
+    export let id: number;
 </script>
 
-<div class="item">
+<div
+    class="item"
+    on:click
+    in:receive="{{key: item.id}}"
+    out:send="{{key: item.id}}"
+>
     {name}
 </div>
 

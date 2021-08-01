@@ -1,8 +1,11 @@
 <script>
     import Item from './Item.svelte'
+    import {fade, crossfade} from 'svelte/transition';
+    import { elasticOut, cubicOut } from 'svelte/easing';
 
-    let isTilted = true
-    const toggleTilt = () => isTilted = !isTilted
+    // #
+    // const [send, receive] = crossfade({duration: d => Math.sqrt(d * 2000), easing: elasticOut});
+    const [send, receive] = crossfade({duration: 750, easing: cubicOut});
 
     let uid = 1
 
@@ -16,39 +19,121 @@
         {id: uid++, isSelectable: false, name: 'StackOverflow'},
         {id: uid++, isSelectable: false, name: 'Github'},
     ]
+
+    const select = (item) => {
+        if (item.isSelectable) {
+            menuItems = menuItems.map(i => ({...i, isSelected: i === item}))
+        }
+        else {
+            console.log(item.name)
+        }
+    }
+
+    const clearSelection = () => {
+        menuItems = menuItems.map(i => ({...i, isSelected: false}))
+    }
+    
+    $: selectedItem = menuItems.find(item => item.isSelected)
 </script>
 
 <main>
-    <div class="App" on:click={toggleTilt}>
-        <div class={`line top-line ${isTilted ? 'tilted' : ''}`}>
-        </div>
-        <div class="title-container">
-            <div class="title-logo">
-                Logo
+    <div class="App">
+        <div class={`line top-line ${!selectedItem ? 'tilted' : ''}`}></div>
+
+        {#if !selectedItem}
+            <div
+                class="title-container"
+
+            >
+                <div
+                    class="title-logo"
+                    on:click={clearSelection}
+                    in:receive="{{key: 'title'}}"
+                    out:send="{{key: 'title'}}"
+                >
+                    Logo
+                </div>
+                <div class="title-text" transition:fade>
+                    <h1 class="title-text-top-row">
+                        I'm Itamar Galili,
+                    </h1>
+                    <h2 class="title-text-bottom-row">
+                        a software developer
+                    </h2>
+                </div>
             </div>
-            <div class="title-text">
-                <h1 class="title-text-top-row">
-                    I'm Itamar Galili,
-                </h1>
-                <h2 class="title-text-bottom-row">
-                    a software developer
-                </h2>
+
+            <div class="items-container-down">
+                <div class="items-container-row top-row">
+                    {#each menuItems.filter(item => item.isSelectable) as item (item.id)}
+                    <div
+                        class="item"
+                        on:click={() => select(item)}
+                        in:receive="{{key: item.id}}"
+                        out:send="{{key: item.id}}"
+                    >
+                        {item.name}
+                    </div>
+                    {/each}
+                </div>
+                <div class="items-container-row bottom-row">
+                    {#each menuItems.filter(item => !item.isSelectable) as item (item.id)}
+                    <div
+                        class="item"
+                        in:receive="{{key: item.id}}"
+                        out:send="{{key: item.id}}"
+                    >
+                        {item.name}
+                    </div>
+                    {/each}
+                </div>
             </div>
-        </div>
-        <div class="items-container">
-            <div class="items-container-row top-row">
-                {#each menuItems.filter(item => item.isSelectable) as {id, name}}
-                    <Item name={name}/>
-                {/each}
+        {/if}
+
+        {#if selectedItem}
+            <h1
+                in:receive="{{key: selectedItem.id}}"
+                out:send="{{key: selectedItem.id}}"
+            >
+                {selectedItem.name}
+            </h1>
+
+            <div class="items-container-left">
+                <div
+                    class="title-logo"
+                    on:click={clearSelection}
+                    in:receive="{{key: 'title'}}"
+                    out:send="{{key: 'title'}}"
+                >
+                    Logo
+                </div>
+                <div class="items-container-row top-row">
+                    {#each menuItems.filter(item => item.isSelectable && !item.isSelected) as item (item.id)}
+                    <div
+                        class="item"
+                        on:click={() => select(item)}
+                        in:receive="{{key: item.id}}"
+                        out:send="{{key: item.id}}"
+                    >
+                        {item.name}
+                    </div>
+                    {/each}
+                </div>
+                <div class="items-container-row bottom-row">
+                    {#each menuItems.filter(item => !item.isSelectable) as item (item.id)}
+                    <div
+                        class="item"
+                        in:receive="{{key: item.id}}"
+                        out:send="{{key: item.id}}"
+                    >
+                        {item.name}
+                    </div>
+                    {/each}
+                </div>
             </div>
-            <div class="items-container-row bottom-row">
-                {#each menuItems.filter(item => !item.isSelectable) as {id, name}}
-                    <Item name={name}/>
-                {/each}
-            </div>
-        </div>
-        <div class={`line bottom-line ${isTilted ? 'tilted' : ''}`}>
-        </div>
+        {/if}
+
+        <div class={`line bottom-line ${!selectedItem ? 'tilted' : ''}`}></div>
     </div>
 </main>
 
@@ -114,7 +199,7 @@
       }
     }
 
-    .items-container {
+    .items-container-down {
       display: flex;
       flex-flow: column;
 
@@ -122,6 +207,38 @@
         display: flex;
         justify-content: space-between;
         margin: 20px 0;
+        .item {
+            margin: 0 20px;
+            padding: 0 10px;
+        }
+      }
+    }
+
+    .items-container-left {
+      display: flex;
+      flex-flow: column;
+      position: absolute;
+      top: 50%;
+      left: 5%;
+
+      .title-logo {
+          border: 1px white solid;
+          background-color: #223;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+      }
+
+      .items-container-row {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        //margin: 20px 0;
+        .item {
+            margin: 5px 0;
+        }
       }
     }
   }
