@@ -35,8 +35,8 @@
     }
 
     $: selectedItem = menuItems.find(item => item.isSelected)
-    $: selectableItems = menuItems.find(item => item.isSelectable && !item.isSelected)
-    $: nonSelectableItems = menuItems.find(item => !item.isSelectable)
+    $: selectableItems = menuItems.filter(item => item.isSelectable && !item.isSelected)
+    $: nonSelectableItems = menuItems.filter(item => !item.isSelectable)
 </script>
 
 <main>
