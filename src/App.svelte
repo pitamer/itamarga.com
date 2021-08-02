@@ -1,9 +1,9 @@
 <script>
     import Item from './Item.svelte'
+    import Line from './Line.svelte'
     import {fade, crossfade} from 'svelte/transition';
     import { elasticOut, cubicOut } from 'svelte/easing';
 
-    // #
     // const [send, receive] = crossfade({duration: d => Math.sqrt(d * 2000), easing: elasticOut});
     const [send, receive] = crossfade({duration: 750, easing: cubicOut});
 
@@ -32,13 +32,13 @@
     const clearSelection = () => {
         menuItems = menuItems.map(i => ({...i, isSelected: false}))
     }
-    
+
     $: selectedItem = menuItems.find(item => item.isSelected)
 </script>
 
 <main>
     <div class="App">
-        <div class={`line top-line ${!selectedItem ? 'tilted' : ''}`}></div>
+        <Line position="top" isTilted={!selectedItem}/>
 
         {#if !selectedItem}
             <div
@@ -91,12 +91,15 @@
         {/if}
 
         {#if selectedItem}
+            {#each menuItems.filter(item => item.isSelected) as item (item.id)}
             <h1
+                style="position: absolute; top: 80px; right: 60%;"
                 in:receive="{{key: selectedItem.id}}"
                 out:send="{{key: selectedItem.id}}"
             >
                 {selectedItem.name}
             </h1>
+            {/each}
 
             <div class="items-container-left">
                 <div
@@ -133,7 +136,7 @@
             </div>
         {/if}
 
-        <div class={`line bottom-line ${!selectedItem ? 'tilted' : ''}`}></div>
+        <Line position="bottom" isTilted={!selectedItem}/>
     </div>
 </main>
 
@@ -146,27 +149,6 @@
     justify-content: space-between;
     margin: 0 auto;
     background-color: #000;
-
-    .line {
-      background-color: #39d353; // # var
-      width: 100%;
-      height: 75px;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-      transition: 0.75s ease-out; // # var
-
-      &.tilted {
-        transition: 0.75s ease-out; // # var
-        height: 100px;
-
-        &.top-line {
-          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
-        }
-
-        &.bottom-line {
-          clip-path: polygon(0 0, 100% 100%, 100% 100%, 0 100%);
-        }
-      }
-    }
 
     .title-container {
       display: flex;
