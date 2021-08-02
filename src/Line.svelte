@@ -15,7 +15,7 @@
 
     &.tilted {
       transition: 0.75s ease-out; // # var
-      height: 100px;
+      height: 110px;
 
       &.top-line {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);

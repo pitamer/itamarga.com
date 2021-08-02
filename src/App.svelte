@@ -3,6 +3,7 @@
     import Line from './Line.svelte'
     import {fade, crossfade} from 'svelte/transition';
     import { elasticOut, cubicOut } from 'svelte/easing';
+    import { flip } from 'svelte/animate';
 
     // const [send, receive] = crossfade({duration: d => Math.sqrt(d * 2000), easing: elasticOut});
     const [send, receive] = crossfade({duration: 750, easing: cubicOut});
@@ -34,6 +35,8 @@
     }
 
     $: selectedItem = menuItems.find(item => item.isSelected)
+    $: selectableItems = menuItems.find(item => item.isSelectable && !item.isSelected)
+    $: nonSelectableItems = menuItems.find(item => !item.isSelectable)
 </script>
 
 <main>
@@ -65,7 +68,7 @@
 
             <div class="items-container-down">
                 <div class="items-container-row top-row">
-                    {#each menuItems.filter(item => item.isSelectable) as item (item.id)}
+                    {#each selectableItems as item (item.id)}
                     <div
                         class="item"
                         on:click={() => select(item)}
@@ -77,7 +80,7 @@
                     {/each}
                 </div>
                 <div class="items-container-row bottom-row">
-                    {#each menuItems.filter(item => !item.isSelectable) as item (item.id)}
+                    {#each nonSelectableItems as item (item.id)}
                     <div
                         class="item"
                         in:receive="{{key: item.id}}"
@@ -93,7 +96,7 @@
         {#if selectedItem}
             {#each menuItems.filter(item => item.isSelected) as item (item.id)}
             <h1
-                style="position: absolute; top: 80px; right: 60%;"
+                style="position: absolute; top: 140px; left: 30%;"
                 in:receive="{{key: selectedItem.id}}"
                 out:send="{{key: selectedItem.id}}"
             >
@@ -111,23 +114,25 @@
                     Logo
                 </div>
                 <div class="items-container-row top-row">
-                    {#each menuItems.filter(item => item.isSelectable && !item.isSelected) as item (item.id)}
+                    {#each selectableItems as item (item.id)}
                     <div
                         class="item"
                         on:click={() => select(item)}
                         in:receive="{{key: item.id}}"
                         out:send="{{key: item.id}}"
+                        animate:flip
                     >
                         {item.name}
                     </div>
                     {/each}
                 </div>
                 <div class="items-container-row bottom-row">
-                    {#each menuItems.filter(item => !item.isSelectable) as item (item.id)}
+                    {#each nonSelectableItems as item (item.id)}
                     <div
                         class="item"
                         in:receive="{{key: item.id}}"
                         out:send="{{key: item.id}}"
+                        animate:flip
                     >
                         {item.name}
                     </div>
@@ -200,7 +205,7 @@
       display: flex;
       flex-flow: column;
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 5%;
 
       .title-logo {
