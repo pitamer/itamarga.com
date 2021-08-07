@@ -1,7 +1,7 @@
 <script>
     import Item from './Item.svelte'
     import Line from './Line.svelte'
-    import {fade, crossfade} from 'svelte/transition';
+    import {crossfade, fade, fly} from 'svelte/transition';
     import { elasticOut, cubicOut } from 'svelte/easing';
     import { flip } from 'svelte/animate';
 
@@ -44,100 +44,119 @@
         <Line position="top" isTilted={!selectedItem}/>
 
         {#if !selectedItem}
-            <div
-                class="title-container"
-
-            >
-                <div
-                    class="title-logo"
-                    on:click={clearSelection}
-                    in:receive="{{key: 'title'}}"
-                    out:send="{{key: 'title'}}"
-                >
-                    Logo
-                </div>
-                <div class="title-text" transition:fade>
-                    <h1 class="title-text-top-row">
-                        I'm Itamar Galili,
-                    </h1>
-                    <h2 class="title-text-bottom-row">
-                        a software developer
-                    </h2>
-                </div>
-            </div>
-
-            <div class="items-container-down">
-                <div class="items-container-row top-row">
-                    {#each selectableItems as item (item.id)}
+            <div class="layout-1">
+                <div class="title-container">
                     <div
-                        class="item"
-                        on:click={() => select(item)}
-                        in:receive="{{key: item.id}}"
-                        out:send="{{key: item.id}}"
+                        class="title-logo"
+                        on:click={clearSelection}
+                        in:receive="{{key: 'title'}}"
+                        out:send="{{key: 'title'}}"
                     >
-                        {item.name}
+                        Logo
                     </div>
-                    {/each}
+                    <div class="title-text">
+                        <h1
+                            class="title-text-top-row"
+                            in:fly={{x: -40, delay: 410}}
+                            out:fly={{x: 50}}
+                        >
+                            I'm Itamar Galili,
+                        </h1>
+                        <h2
+                            class="title-text-bottom-row"
+                            in:fly={{x: -40, delay: 510}}
+                            out:fly={{x: 50, delay: 75}}
+                        >
+                            a software developer
+                        </h2>
+                    </div>
                 </div>
-                <div class="items-container-row bottom-row">
-                    {#each nonSelectableItems as item (item.id)}
-                    <div
-                        class="item"
-                        in:receive="{{key: item.id}}"
-                        out:send="{{key: item.id}}"
-                    >
-                        {item.name}
+
+                <div class="items-container">
+                    <div class="items-container-group top-row">
+                        {#each selectableItems as item (item.id)}
+                        <div
+                            class="item"
+                            on:click={() => select(item)}
+                            in:receive="{{key: item.id}}"
+                            out:send="{{key: item.id}}"
+                        >
+                            {item.name}
+                        </div>
+                        {/each}
                     </div>
-                    {/each}
+                    <div class="items-container-group bottom-row">
+                        {#each nonSelectableItems as item (item.id)}
+                        <div
+                            class="item"
+                            in:receive="{{key: item.id}}"
+                            out:send="{{key: item.id}}"
+                        >
+                            {item.name}
+                        </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
         {/if}
 
         {#if selectedItem}
-            {#each menuItems.filter(item => item.isSelected) as item (item.id)}
-            <h1
-                style="position: absolute; top: 140px; left: 30%;"
-                in:receive="{{key: selectedItem.id}}"
-                out:send="{{key: selectedItem.id}}"
-            >
-                {selectedItem.name}
-            </h1>
-            {/each}
+            <div class="layout-2">
+                <div class="items-container">
+                    <div
+                        class="title-logo"
+                        on:click={clearSelection}
+                        in:receive="{{key: 'title'}}"
+                        out:send="{{key: 'title'}}"
+                    >
+                        Logo
+                    </div>
+                    <div class="items-container-group top-row">
+                        {#each selectableItems as item (item.id)}
+                        <div
+                            class="item"
+                            on:click={() => select(item)}
+                            in:receive="{{key: item.id}}"
+                            out:send="{{key: item.id}}"
+                            animate:flip
+                        >
+                            {item.name}
+                        </div>
+                        {/each}
+                    </div>
+                    <div class="items-container-group bottom-row">
+                        {#each nonSelectableItems as item (item.id)}
+                        <div
+                            class="item"
+                            in:receive="{{key: item.id}}"
+                            out:send="{{key: item.id}}"
+                            animate:flip
+                        >
+                            {item.name}
+                        </div>
+                        {/each}
+                    </div>
+                </div>
 
-            <div class="items-container-left">
-                <div
-                    class="title-logo"
-                    on:click={clearSelection}
-                    in:receive="{{key: 'title'}}"
-                    out:send="{{key: 'title'}}"
-                >
-                    Logo
-                </div>
-                <div class="items-container-row top-row">
-                    {#each selectableItems as item (item.id)}
-                    <div
-                        class="item"
-                        on:click={() => select(item)}
-                        in:receive="{{key: item.id}}"
-                        out:send="{{key: item.id}}"
-                        animate:flip
-                    >
-                        {item.name}
+                <div class="selected-wait-list">
+                    {#each menuItems.filter(item => item.isSelected) as item (item.id)}
+                    <div class="selected-item-content">
+                        <h1
+                            in:receive="{{key: selectedItem.id}}"
+                            out:send="{{key: selectedItem.id}}"
+                        >
+                            {selectedItem.name}
+                        </h1>
+                        <p
+                            in:fly={{x: -20, delay: 600}}
+                            out:fly={{x: 20}}
+                        >
+                            {selectedItem.name}
+                        </p>
                     </div>
                     {/each}
                 </div>
-                <div class="items-container-row bottom-row">
-                    {#each nonSelectableItems as item (item.id)}
-                    <div
-                        class="item"
-                        in:receive="{{key: item.id}}"
-                        out:send="{{key: item.id}}"
-                        animate:flip
-                    >
-                        {item.name}
-                    </div>
-                    {/each}
-                </div>
+
             </div>
         {/if}
 
@@ -155,60 +174,98 @@
     margin: 0 auto;
     background-color: #000;
 
-    .title-container {
+    .layout-1 {
+      flex-grow: 1;
+
       display: flex;
       flex-flow: column;
-      place-items: center;
+      justify-content: space-evenly;
 
-      .title-logo {
-        border: 1px white solid;
-        background-color: #223;
-        width: 175px;
-        height: 175px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-      }
-
-      .title-text {
+      .title-container {
         display: flex;
         flex-flow: column;
+        place-items: center;
 
-        .title-text-top-row {
-          font-size: 40px;
-          margin: 10px 0;
+        .title-logo {
+          border: 1px white solid;
+          background-color: #223;
+          width: 175px;
+          height: 175px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
         }
 
-        .title-text-bottom-row {
-          font-size: 30px;
-          margin: 10px 0;
+        .title-text {
+          display: flex;
+          flex-flow: column;
+
+          .title-text-top-row {
+            font-size: 40px;
+            margin: 10px 0;
+          }
+
+          .title-text-bottom-row {
+            font-size: 30px;
+            margin: 10px 0;
+          }
         }
       }
-    }
 
-    .items-container-down {
-      display: flex;
-      flex-flow: column;
-
-      .items-container-row {
+      .items-container {
         display: flex;
+        flex-flow: column;
         justify-content: space-between;
-        margin: 20px 0;
-        .item {
-            margin: 0 20px;
-            padding: 0 10px;
+        align-items: center;
+        height: 100px;
+
+        .items-container-group {
+          display: flex;
+          justify-content: space-between;
+          width: 600px;
         }
       }
     }
 
-    .items-container-left {
-      display: flex;
-      flex-flow: column;
+    .layout-1, .layout-2 {
       position: absolute;
-      top: 40%;
-      left: 5%;
+      width: 100%;
+      height: 100%;
+    }
 
-      .title-logo {
+    .layout-2 {
+      flex-grow: 1;
+
+      display: flex;
+      position: relative;
+
+      .selected-wait-list {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        height: 100%;
+
+        .selected-item-content {
+          grid-row-start: 1;
+          grid-column-start: 1;
+
+          h1 {
+          }
+
+          p {
+          }
+        }
+      }
+
+      .items-container {
+        display: flex;
+        flex-flow: column;
+        min-width: 200px;
+        justify-content: space-evenly;
+
+        padding: 30px;
+
+        .title-logo {
           border: 1px white solid;
           background-color: #223;
           width: 40px;
@@ -216,15 +273,16 @@
           border-radius: 50%;
           display: grid;
           place-items: center;
-      }
+        }
 
-      .items-container-row {
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        //margin: 20px 0;
-        .item {
+        .items-container-group {
+          display: flex;
+          flex-flow: column;
+          justify-content: space-between;
+          align-items: flex-start;
+          .item {
             margin: 5px 0;
+          }
         }
       }
     }
