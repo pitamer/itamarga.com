@@ -52,7 +52,7 @@
                         in:receive="{{key: 'title'}}"
                         out:send="{{key: 'title'}}"
                     >
-                        Logo
+<!--                        Logo-->
                     </div>
                     <div class="title-text">
                         <h1
@@ -64,7 +64,7 @@
                         </h1>
                         <h2
                             class="title-text-bottom-row"
-                            in:fly={{x: -40, delay: 510}}
+                            in:fly={{x: -40, delay: 485}}
                             out:fly={{x: 50, delay: 75}}
                         >
                             a software developer
@@ -109,10 +109,10 @@
                         in:receive="{{key: 'title'}}"
                         out:send="{{key: 'title'}}"
                     >
-                        Logo
+<!--                        Logo-->
                     </div>
                     <div class="items-container-group top-row">
-                        {#each selectableItems as item (item.id)}
+                        {#each selectableItems.concat(nonSelectableItems) as item (item.id)}
                         <div
                             class="item"
                             on:click={() => select(item)}
@@ -124,18 +124,18 @@
                         </div>
                         {/each}
                     </div>
-                    <div class="items-container-group bottom-row">
-                        {#each nonSelectableItems as item (item.id)}
-                        <div
-                            class="item"
-                            in:receive="{{key: item.id}}"
-                            out:send="{{key: item.id}}"
-                            animate:flip
-                        >
-                            {item.name}
-                        </div>
-                        {/each}
-                    </div>
+<!--                    <div class="items-container-group bottom-row">-->
+<!--                        {#each nonSelectableItems as item (item.id)}-->
+<!--                        <div-->
+<!--                            class="item"-->
+<!--                            in:receive="{{key: item.id}}"-->
+<!--                            out:send="{{key: item.id}}"-->
+<!--                            animate:flip-->
+<!--                        >-->
+<!--                            {item.name}-->
+<!--                        </div>-->
+<!--                        {/each}-->
+<!--                    </div>-->
                 </div>
 
                 <div class="selected-wait-list">
@@ -148,10 +148,27 @@
                             {selectedItem.name}
                         </h1>
                         <p
-                            in:fly={{x: -20, delay: 600}}
-                            out:fly={{x: 20}}
+                            in:fly={{x: -25, delay: 600}}
+                            out:fly={{x: 25}}
                         >
-                            {selectedItem.name}
+                            <br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Consectetur corporis culpa deserunt dignissimos dolore
+                            dolorem doloremque ducimus incidunt iste, magni odit
+                            pariatur placeat praesentium, quidem reiciendis saepe ut
+                            vel voluptatum.
+                            <br><br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Consectetur corporis culpa deserunt dignissimos dolore
+                            dolorem doloremque ducimus incidunt iste, magni odit
+                            pariatur placeat praesentium, quidem reiciendis saepe ut
+                            vel voluptatum.
+                            <br><br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Consectetur corporis culpa deserunt dignissimos dolore
+                            dolorem doloremque ducimus incidunt iste, magni odit
+                            pariatur placeat praesentium, quidem reiciendis saepe ut
+                            vel voluptatum.
                         </p>
                     </div>
                     {/each}
@@ -248,11 +265,21 @@
         .selected-item-content {
           grid-row-start: 1;
           grid-column-start: 1;
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          max-width: 800px;
+          margin-top: 70px;
 
           h1 {
+            margin: 0;
+            padding: 0;
           }
 
           p {
+            font-size: 22px;
+            line-height: 30px;
+            margin: 0 40px 0 0;
           }
         }
       }
@@ -280,8 +307,9 @@
           flex-flow: column;
           justify-content: space-between;
           align-items: flex-start;
+          height: 300px;
           .item {
-            margin: 5px 0;
+            //margin: 5px 0;
           }
         }
       }
