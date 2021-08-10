@@ -1,5 +1,4 @@
 <script>
-    import Item from './Item.svelte'
     import Line from './Line.svelte'
     import {crossfade, fade, fly} from 'svelte/transition';
     import { elasticOut, cubicOut } from 'svelte/easing';
@@ -11,10 +10,10 @@
     let uid = 1
 
     let menuItems = [
-        {id: uid++, isSelectable: true, isSelected: false, name: 'About me'},
-        {id: uid++, isSelectable: true, isSelected: false, name: 'Experience'},
-        {id: uid++, isSelectable: true, isSelected: false, name: 'Blog'},
-        {id: uid++, isSelectable: true, isSelected: false, name: 'Contact'},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'About me', color: "blue"},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Experience', color: "purple"},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Blog', color: "red"},
+        {id: uid++, isSelectable: true, isSelected: false, name: 'Contact', color: "yellow"},
         {id: uid++, isSelectable: false, name: 'LinkedIn'},
         {id: uid++, isSelectable: false, name: 'Twitter'},
         {id: uid++, isSelectable: false, name: 'StackOverflow'},
@@ -41,7 +40,7 @@
 
 <main>
     <div class="App">
-        <Line position="top" isTilted={!selectedItem}/>
+        <Line position="top" isTilted={!selectedItem} color={selectedItem?.color}/>
 
         {#if !selectedItem}
             <div class="layout-1">
@@ -57,14 +56,14 @@
                     <div class="title-text">
                         <h1
                             class="title-text-top-row"
-                            in:fly={{x: -40, delay: 410}}
+                            in:fly={{x: -40, delay: 425}}
                             out:fly={{x: 50}}
                         >
                             I'm Itamar Galili,
                         </h1>
                         <h2
                             class="title-text-bottom-row"
-                            in:fly={{x: -40, delay: 485}}
+                            in:fly={{x: -40, delay: 500}}
                             out:fly={{x: 50, delay: 75}}
                         >
                             a software developer
@@ -177,7 +176,7 @@
             </div>
         {/if}
 
-        <Line position="bottom" isTilted={!selectedItem}/>
+        <Line position="bottom" isTilted={!selectedItem} color={selectedItem?.color}/>
     </div>
 </main>
 
@@ -240,6 +239,11 @@
           display: flex;
           justify-content: space-between;
           width: 600px;
+
+          .item {
+            // # Use a mixin!
+            cursor: pointer;
+          }
         }
       }
     }
@@ -288,9 +292,9 @@
         display: flex;
         flex-flow: column;
         min-width: 200px;
-        justify-content: space-evenly;
+        justify-content: center;
 
-        padding: 30px;
+        padding-left: 30px;
 
         .title-logo {
           border: 1px white solid;
@@ -300,6 +304,8 @@
           border-radius: 50%;
           display: grid;
           place-items: center;
+          cursor: pointer;
+          margin: 30px 2px;
         }
 
         .items-container-group {
@@ -308,8 +314,10 @@
           justify-content: space-between;
           align-items: flex-start;
           height: 300px;
+
           .item {
-            //margin: 5px 0;
+            // # Use a mixin!
+            cursor: pointer;
           }
         }
       }
