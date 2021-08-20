@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oxygen&display=swap');
+
 html, body {
     position: relative;
     width: 100%;
@@ -9,7 +14,12 @@ body {
     color: #fff;
     box-sizing: border-box;
 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+    font-family:
+            /*Oxygen,*/
+            Montserrat,
+            /*Ubuntu,*/
+            /*Raleway,*/
+            -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
     Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', "Helvetica Neue", sans-serif;
 
     /* // # TODO: Consider uncommenting these 2 lines; research their effect */
