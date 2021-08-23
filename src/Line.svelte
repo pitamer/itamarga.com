@@ -18,14 +18,31 @@
     position: absolute;
     z-index: 1;
 
-    &.top-line {top: 0;}
-    &.bottom-line {bottom: 0;}
+    &.top-line {
+      top: 0;
+    }
+
+    &.bottom-line {
+      bottom: 0;
+    }
 
     background-color: base.$green_;
-    &.blue {background-color: base.$blue_;}
-    &.purple {background-color: base.$purple_;}
-    &.red {background-color: base.$red_;}
-    &.yellow {background-color: base.$yellow_;}
+
+    &.blue {
+      background-color: base.$blue_;
+    }
+
+    &.purple {
+      background-color: base.$purple_;
+    }
+
+    &.red {
+      background-color: base.$red_;
+    }
+
+    &.yellow {
+      background-color: base.$yellow_;
+    }
 
     &.tilted {
       height: 10%;
