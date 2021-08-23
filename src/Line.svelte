@@ -12,12 +12,14 @@
 
   .line {
     width: 100%;
-    height: 20px;
+    height: 2%;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    transition: 0.75s ease-out, background-color 1.5s ease-in-out; // # var
+    transition: 0.75s ease-out, background-color 1.5s ease-in-out;
+    position: absolute;
+    z-index: 1;
 
-    &.top-line {align-self: flex-end;}
-    &.bottom-line {align-self: flex-start;}
+    &.top-line {top: 0;}
+    &.bottom-line {bottom: 0;}
 
     background-color: base.$green_;
     &.blue {background-color: base.$blue_;}
@@ -26,7 +28,7 @@
     &.yellow {background-color: base.$yellow_;}
 
     &.tilted {
-      height: 110px;
+      height: 10%;
 
       &.top-line {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
