@@ -26,9 +26,6 @@
         if (item.isSelectable) {
             menuItems = menuItems.map(i => ({...i, isLastSelected: i.isSelected, isSelected: i === item}))
         }
-        else {
-            console.log(item.name)
-        }
     }
 
     const clearSelection = () => {
@@ -46,6 +43,8 @@
     }
 
     const itemTransitionObject = item => ({key: item.id, delay: getTransitionDelay(item)})
+
+    const flipAnimationObject = {duration: DEFAULT_TRANSITION_DURATION}
 
     $: selectedItem = menuItems.find(item => item.isSelected)
     $: textLines = selectedItem?.textLines
@@ -86,27 +85,27 @@
             </div>
 
             <div class="items-container">
-                <div class="items-container-group top-row">
+                <div class="items-group top-group">
                     {#each selectableItems as item (item.id)}
-                    <div
+                    <span
                         class="item"
                         on:click={() => select(item)}
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
                     >
                         {item.name}
-                    </div>
+                    </span>
                     {/each}
                 </div>
-                <div class="items-container-group bottom-row">
+                <div class="items-group bottom-group">
                     {#each nonSelectableItems as item (item.id)}
-                    <div
+                    <a
                         class="item"
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
                     >
                         {item.name}
-                    </div>
+                    </a>
                     {/each}
                 </div>
             </div>
@@ -115,7 +114,7 @@
 
     {#if selectedItem}
         <div class="layout-2">
-            <div class="items-container">
+            <div class="items-and-logo-container">
                 <div
                     class="title-logo"
                     on:click={clearSelection}
@@ -123,18 +122,32 @@
                     out:send="{{key: 'site-logo'}}"
                 >
                 </div>
-                <div class="items-container-group">
-                    {#each selectableItems.concat(nonSelectableItems) as item (item.id)}
-                    <div
-                        class="item"
-                        on:click={() => select(item)}
-                        in:receive="{itemTransitionObject(item)}"
-                        out:send="{itemTransitionObject(item)}"
-                        animate:flip
-                    >
-                        {item.name}
+                <div class="items-container">
+                    <div class="items-group top-group">
+                        {#each selectableItems as item (item.id)}
+                        <span
+                            class="item"
+                            on:click={() => select(item)}
+                            in:receive="{itemTransitionObject(item)}"
+                            out:send="{itemTransitionObject(item)}"
+                            animate:flip={flipAnimationObject}
+                        >
+                            {item.name}
+                        </span>
+                        {/each}
                     </div>
-                    {/each}
+                    <div class="items-group bottom-group">
+                        {#each nonSelectableItems as item (item.id)}
+                        <a
+                            class="item"
+                            in:receive="{itemTransitionObject(item)}"
+                            out:send="{itemTransitionObject(item)}"
+                            animate:flip={flipAnimationObject}
+                        >
+                            {item.name}
+                        </a>
+                        {/each}
+                    </div>
                 </div>
             </div>
 
@@ -149,12 +162,12 @@
                     </h1>
                     <div>
                         {#each textLines as textLine, index (index)}
-                            <p
+                            <div
                                 in:fly={{y: -SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_IN_DURATION / textLines.length) + LONG_DELAY_DURATION}}
                                 out:fly={{x: SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_IN_DURATION / textLines.length)}}
                             >
                             {@html textLine}
-                            </p>
+                            </div>
                         {/each}
                     </div>
                 </div>
@@ -171,16 +184,16 @@
   @use 'base';
 
   #App {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0 auto;
-    background-color: #000;
 
     .layout-1 {
       flex-grow: 1;
+      max-height: 80%;
 
       display: flex;
       flex-flow: column;
@@ -192,27 +205,26 @@
         place-items: center;
 
         .title-logo {
-          border: 1px white solid;
+          border: 2px white solid;
           background-color: #223;
           width: 175px;
           height: 175px;
           border-radius: 50%;
-          display: grid;
-          place-items: center;
         }
 
         .title-text {
           display: flex;
           flex-flow: column;
+          align-items: center;
 
           .title-text-top-row {
             font-size: 40px;
-            margin: 10px 0;
+            margin: 20px 0 0 0;
           }
 
           .title-text-bottom-row {
             font-size: 30px;
-            margin: 10px 0;
+            margin: 15px 0 0 0;
           }
         }
       }
@@ -222,9 +234,9 @@
         flex-flow: column;
         justify-content: space-between;
         align-items: center;
-        height: 100px;
+        height: 110px;
 
-        .items-container-group {
+        .items-group {
           display: flex;
           justify-content: space-between;
           width: 600px;
@@ -244,6 +256,7 @@
 
     .layout-2 {
       flex-grow: 1;
+      max-height: 96%;
 
       display: flex;
       position: relative;
@@ -269,20 +282,19 @@
           }
 
           div {
-            font-size: 22px;
-            line-height: 30px;
+            font-size: 21px;
+            line-height: 32px;
             margin: 0 40px 0 0;
           }
         }
       }
 
-      .items-container {
+      .items-and-logo-container {
         display: flex;
         flex-flow: column;
-        min-width: 200px;
+        max-width: 200px;
         justify-content: center;
-
-        padding-left: 30px;
+        padding: 0 30px;
 
         .title-logo {
           border: 1px white solid;
@@ -290,21 +302,32 @@
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          display: grid;
-          place-items: center;
           cursor: pointer;
-          margin: 30px 2px;
+          margin: 20px 2px;
         }
 
-        .items-container-group {
+        .items-container {
+          height: 40%;
           display: flex;
           flex-flow: column;
-          justify-content: space-between;
-          align-items: flex-start;
-          height: 300px;
 
-          .item {
-            @extend %clickable-button;
+          .items-group {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-around;
+            align-items: flex-start;
+
+            &.top-group {
+              flex-grow: 3;
+            }
+
+            &.bottom-group {
+              flex-grow: 4;
+            }
+
+            .item {
+              @extend %clickable-button;
+            }
           }
         }
       }
