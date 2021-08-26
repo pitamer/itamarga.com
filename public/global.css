@@ -36,6 +36,10 @@ a:hover {
     transition: 0.08s;
 }
 
+i {
+    margin-inline-end: 0.2em;
+}
+
 label {
     display: block;
 }

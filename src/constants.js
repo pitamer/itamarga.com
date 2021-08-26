@@ -14,6 +14,7 @@ export const INITIAL_MENU_ITEMS = [
     {
         id: 1,
         name: "About me",
+        icon: "fas fa-info-circle",
         color: "blue",
         isSelectable: true,
         isSelected: false,
@@ -29,6 +30,7 @@ export const INITIAL_MENU_ITEMS = [
     {
         id: 2,
         name: "Experience",
+        icon: "fas fa-code",
         color: "purple",
         isSelectable: true,
         isSelected: false,
@@ -45,6 +47,7 @@ export const INITIAL_MENU_ITEMS = [
     {
         id: 3,
         name: "Blog",
+        icon: "fas fa-book",
         color: "red",
         isSelectable: true,
         isSelected: false,
@@ -58,6 +61,7 @@ export const INITIAL_MENU_ITEMS = [
     {
         id: 4,
         name: "Contact",
+        icon: "fas fa-envelope",
         color: "yellow",
         isSelectable: true,
         isSelected: false,
@@ -72,21 +76,25 @@ export const INITIAL_MENU_ITEMS = [
     {
         id: 5,
         name: "LinkedIn",
+        icon: "fab fa-linkedin",
         isSelectable: false,
     },
     {
         id: 6,
         name: "Twitter",
+        icon: "fab fa-twitter",
         isSelectable: false,
     },
     {
         id: 7,
         name: "StackOverflow",
+        icon: "fab fa-stack-overflow",
         isSelectable: false,
     },
     {
         id: 8,
         name: "Github",
+        icon: "fab fa-github",
         isSelectable: false,
     },
 ]

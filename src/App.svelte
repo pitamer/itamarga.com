@@ -49,6 +49,8 @@
     const itemTransitionObject = item => ({key: item.id, delay: getTransitionDelay(item)})
     const flipAnimationObject = {duration: DEFAULT_TRANSITION_DURATION}
 
+    const itemTitle = item => `<i class="${item.icon}"></i> ${item.name}`
+
     $: selectedItem = menuItems.find(item => item.isSelected)
     $: textLines = selectedItem?.textLines
 
@@ -104,7 +106,7 @@
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
                     >
-                        {item.name}
+                        {@html itemTitle(item)}
                     </span>
                     {/each}
                 </div>
@@ -115,7 +117,7 @@
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
                     >
-                        {item.name}
+                        {@html itemTitle(item)}
                     </a>
                     {/each}
                 </div>
@@ -143,7 +145,7 @@
                             out:send="{itemTransitionObject(item)}"
                             animate:flip={flipAnimationObject}
                         >
-                            {item.name}
+                            {@html itemTitle(item)}
                         </span>
                         {/each}
                     </div>
@@ -155,7 +157,7 @@
                             out:send="{itemTransitionObject(item)}"
                             animate:flip={flipAnimationObject}
                         >
-                            {item.name}
+                            {@html itemTitle(item)}
                         </a>
                         {/each}
                     </div>
@@ -171,7 +173,7 @@
                         on:introend={setTransitioningFree}
                         on:outroend={setTransitioningFree}
                     >
-                        {item.name}
+                        {@html itemTitle(item)}
                     </h1>
                     <div>
                         {#each textLines as textLine, index (index)}
