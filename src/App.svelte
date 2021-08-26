@@ -16,20 +16,24 @@
 
     let menuItems = INITIAL_MENU_ITEMS
 
-    // #
-    // let isCurrentlyTransitioning = false
-    // const setIsCurrentlyTransitioning = (bool) => isCurrentlyTransitioning = bool
+    let isCurrentlyTransitioning = false
+    const setTransitioningBusy = () => isCurrentlyTransitioning = true
+    const setTransitioningFree = () => isCurrentlyTransitioning = false
 
-    const [send, receive] = crossfade({duration: DEFAULT_TRANSITION_DURATION, easing: cubicOut});
+    const [send, receive] = crossfade({duration: DEFAULT_TRANSITION_DURATION, easing: cubicOut})
 
     const select = item => {
-        if (item.isSelectable) {
+        if (item.isSelectable && !isCurrentlyTransitioning) {
+            setTransitioningBusy()
             menuItems = menuItems.map(i => ({...i, isLastSelected: i.isSelected, isSelected: i === item}))
         }
     }
 
     const clearSelection = () => {
-        menuItems = menuItems.map(item => ({...item, isSelected: false}))
+        if (!isCurrentlyTransitioning) {
+            setTransitioningBusy()
+            menuItems = menuItems.map(item => ({...item, isSelected: false}))
+        }
     }
 
     const getTransitionDelay = item => {
@@ -43,7 +47,6 @@
     }
 
     const itemTransitionObject = item => ({key: item.id, delay: getTransitionDelay(item)})
-
     const flipAnimationObject = {duration: DEFAULT_TRANSITION_DURATION}
 
     $: selectedItem = menuItems.find(item => item.isSelected)
@@ -51,6 +54,12 @@
 
     $: selectableItems = menuItems.filter(item => item.isSelectable && !item.isSelected)
     $: nonSelectableItems = menuItems.filter(item => !item.isSelectable)
+
+    // Since tracking transition activity through transition events alone turns out to be problematic, this
+    // will cap the truthiness time of isCurrentlyTransitioning at an approximation of the transition time
+    $: if (isCurrentlyTransitioning) {
+        setTimeout(setTransitioningFree, DEFAULT_TRANSITION_DURATION + SHORT_DELAY_DURATION)
+    }
 </script>
 
 <main id="App">
@@ -64,6 +73,8 @@
                     on:click={clearSelection}
                     in:receive="{{key: 'site-logo'}}"
                     out:send="{{key: 'site-logo'}}"
+                    on:introend={setTransitioningFree}
+                    on:outroend={setTransitioningFree}
                 >
                 </div>
                 <div class="title-text">
@@ -157,6 +168,8 @@
                     <h1
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
+                        on:introend={setTransitioningFree}
+                        on:outroend={setTransitioningFree}
                     >
                         {item.name}
                     </h1>
@@ -273,8 +286,8 @@
           display: flex;
           flex-flow: column;
           align-items: flex-start;
-          max-width: 900px;
-          margin-top: 70px;
+          max-width: 850px;
+          margin: 0 40px 0 0;
 
           h1 {
             margin: 0;
@@ -284,7 +297,6 @@
           div {
             font-size: 21px;
             line-height: 32px;
-            margin: 0 40px 0 0;
           }
         }
       }
