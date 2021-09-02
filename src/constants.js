@@ -37,7 +37,7 @@ export const INITIAL_MENU_ITEMS = [
         isLastSelected: false,
         textLines: [
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I used to be a team lead and a product manager.</strong></p>",
-            "<p>from 2016 to 2018, I served as an intelligence team lead and then as a software product manager in a classified army unit. It was amazing, but it also made me realize that I enjoy creating more than I do directing.</p>",
+            "<p>from 2016 to 2018, I served as an intelligence team lead and then as a software product manager in <a href='https://en.wikipedia.org/wiki/Unit_8200/' target='_blank' rel='noopener noreferrer'>unit 8200</a>. It was amazing, but it also made me realize that I enjoy creating more than I do directing.</p>",
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I created automation scripts for ML training data collection.</strong></p>",
             "<p>from 2019 to 2020, I worked at <a href='https://www.tsgitsystems.com/' target='_blank' rel='noopener noreferrer'>TSG</a>, in my debut as a developer. My team and I conceived, designed and built elegant internal solutions for data collection and curation. I loved every minute of it.</p>",
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I developed intricate, multifaceted web and mobile apps.</strong></p>",
