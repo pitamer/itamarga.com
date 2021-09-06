@@ -64,7 +64,7 @@
     }
 </script>
 
-<main id="App">
+<main id="app">
     <Line position="top" isTilted={!selectedItem} color={selectedItem?.color}/>
 
     {#if !selectedItem}
@@ -198,13 +198,14 @@
 <style lang="scss">
   @use 'base';
 
-  #App {
+  #app {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    font-size: 16px;
 
     .layout-1 {
       flex-grow: 1;
@@ -222,8 +223,10 @@
         .title-logo {
           border: 2px white solid;
           background-color: #223;
-          width: 175px;
-          height: 175px;
+          //width: 175px;
+          //height: 175px;
+          width: 10em;
+          height: 10em;
           border-radius: 50%;
         }
 
@@ -233,13 +236,15 @@
           align-items: center;
 
           .title-text-top-row {
-            font-size: 40px;
+            //font-size: 40px;
+            font-size: 2.5em;
             margin: 20px 0 0 0;
           }
 
           .title-text-bottom-row {
-            font-size: 30px;
-            margin: 15px 0 0 0;
+            //font-size: 30px;
+            font-size: 1.9em;
+            margin: 15px 0 0    0;
           }
         }
       }
@@ -297,7 +302,7 @@
           }
 
           div {
-            font-size: 21px;
+            font-size: 1.15em;
             line-height: 32px;
           }
         }
@@ -306,6 +311,8 @@
       .items-and-logo-container {
         display: flex;
         flex-flow: column;
+        // #
+        min-width: 150px;
         max-width: 200px;
         justify-content: center;
         padding: 0 30px;
@@ -348,9 +355,49 @@
     }
   }
 
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+  /* big landscape tablets, laptops, and desktops */
+  @media (max-width: 1280px) {
+    //* {
+    //  outline: 1px green dashed;
+    //}
+  }
+
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  @media (max-width: 1024px) {
+    #app {
+      font-size: 14px;
     }
   }
+
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  @media (max-width: 960px)  {
+    //* {
+    //  outline: 1px orange dashed;
+    //}
+  }
+
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  @media (max-width: 640px)  {
+    * {
+      outline: 1px red dashed;
+    }
+  }
+
+  /* smartphones, iPhone, portrait 480x320 phones */
+  @media (max-width: 480px)  {
+    * {
+      outline: 1px pink dashed;
+    }
+  }
+
+  @media (max-width: 319px)  {
+    * {
+      outline: none;
+      display: none;
+    }
+  }
+
+  /* hi-res laptops and desktops */
+  // Nothing.
+
 </style>
