@@ -374,19 +374,165 @@
     //* {
     //  outline: 1px orange dashed;
     //}
+    #app {
+      font-size: 12px;
+    }
   }
 
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   @media (max-width: 640px)  {
-    * {
-      outline: 1px red dashed;
-    }
+    //* {
+    //  outline: 1px red dashed;
+    //}
+
+    // # Move 480px media query behaviour to here?
   }
 
   /* smartphones, iPhone, portrait 480x320 phones */
   @media (max-width: 480px)  {
-    * {
-      outline: 1px pink dashed;
+    #app {
+      font-size: 10px;
+      .layout-1 {
+        .items-container {
+          height: auto;
+
+          .items-group {
+            max-width: 100vw;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            .item {
+              justify-self: start;
+              margin-left: 15%;
+              margin-top: 10%;
+            }
+          }
+        }
+      }
+
+      .layout-2 {
+        flex-flow: column-reverse;
+
+        .selected-item-slot {
+            //flex-grow: 1;
+            //display: grid;
+            //grid-template-columns: 1fr;
+            //place-items: center;
+
+            // # Take whole scroll thong to responsive part, since that's where
+            // it's relevant, plus it will help avoid a Firefox visual problem
+
+            overflow-y: scroll;
+
+            // # Test both methods of scrollbar hiding on mobile, with all 3 browsers
+
+            //::-webkit-scrollbar {
+            //    display: none;
+            //}
+            //
+            //scrollbar-width: none;
+
+            .selected-item {
+              //grid-row-start: 1;
+              //grid-column-start: 1;
+              //display: flex;
+              //flex-flow: column;
+              //align-items: flex-start;
+              //max-width: 850px;
+              //margin: 0 40px 0 0;
+              margin: 9px;
+
+              h1 {
+                //margin: 0;
+                //padding: 0;
+              }
+
+              div {
+                //font-size: 1.15em;
+                //line-height: 32px;
+
+                // # Fine tune it later
+                line-height: 22px;
+              }
+            }
+          }
+
+          .items-and-logo-container {
+            max-width: 100%;
+            display: flex;
+            flex-flow: row;
+
+            //border-top: 1px #555 solid;
+            box-shadow: 0 0 7px 5px black; // # Var needed
+            z-index: 1;
+
+            //display: flex;
+            //flex-flow: column;
+            //// #
+            //min-width: 150px;
+            //max-width: 200px;
+            //justify-content: center;
+
+            padding: 0;
+            margin: 0;
+
+            .title-logo {
+              height: 16px;
+              width: 16px;
+
+              padding: calc(#{base.$mobile_items_padding} * 0.2);
+              margin: calc(#{base.$mobile_items_padding} * 0.8);
+
+              //border: 1px white solid;
+              //background-color: #223;
+              //width: 40px;
+              //height: 40px;
+              //border-radius: 50%;
+              //cursor: pointer;
+              //margin: 20px 2px;
+            }
+
+            .items-container {
+              //height: 40%;
+              //display: flex;
+              //flex-flow: column;
+              flex-flow: row;
+              flex-grow: 1;
+
+              .items-group {
+                flex-flow: row;
+                justify-content: space-around;
+
+                //display: flex;
+                //flex-flow: column;
+                //justify-content: space-around;
+                //align-items: flex-start;
+
+                &.top-group {
+                  //flex-grow: 3;
+                }
+
+                &.bottom-group {
+                  //flex-grow: 4;
+                }
+
+                a {
+                  box-shadow: none;
+                }
+
+                .item {
+                  padding: base.$mobile_items_padding;
+                  //opacity: 0;
+                  font-size: 0;
+                  i {
+                    color: red !important;
+                  }
+                  //@extend %clickable-button;
+                }
+              }
+            }
+          }
+      }
     }
   }
 

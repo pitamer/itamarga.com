@@ -17,7 +17,7 @@ export const INITIAL_MENU_ITEMS = [
         icon: "fas fa-info-circle",
         color: "blue",
         isSelectable: true,
-        isSelected: false,
+        isSelected: true,
         isLastSelected: false,
         textLines: [
             "<p>I'm Itamar Galili, a software developer.</p>",

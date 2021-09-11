@@ -4,6 +4,9 @@ html, body {
     position: relative;
     width: 100%;
     height: 100%;
+
+    /*// # Good for transitions on phones. Might cause problems? */
+    overflow: hidden;
 }
 
 body {
@@ -38,6 +41,16 @@ a:hover {
 
 i {
     margin-inline-end: 0.2em;
+}
+
+/* A HACK */
+span i {
+    font-size: 16px;
+}
+
+/* A HACK */
+a i {
+    font-size: 16px;
 }
 
 label {
