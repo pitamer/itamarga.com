@@ -11,3 +11,15 @@ $mobile_items_padding: 10px;
   user-select: none;
   font-size: 16px;
 }
+
+@mixin completely-eliminate-desktop-scrollbars {
+  // Chrome / Safari / Webkit
+  &::-webkit-scrollbar {
+    background: transparent;
+    height: 0;
+    width: 0;
+  }
+
+  // Firefox
+  scrollbar-width: none;
+}
