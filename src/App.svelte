@@ -262,7 +262,7 @@
           width: 600px;
 
           .item {
-            @extend %clickable-button;
+            @include base.clickable-item;
           }
         }
       }
@@ -350,7 +350,7 @@
             }
 
             .item {
-              @extend %clickable-button;
+              @include base.clickable-item;
             }
           }
         }
@@ -366,7 +366,7 @@
   }
 
   // portrait tablets, portrait iPads, landscape e-readers, landscape big smartphones
-  @media (max-width: 960px)  {
+  @media (max-width: 960px) {
     #app {
       font-size: 11px;
 
@@ -398,7 +398,7 @@
   }
 
   // portrait e-readers, smaller tablets, smartphones
-  @media (max-width: 640px)  {
+  @media (max-width: 640px) {
     #app {
       font-size: 10px;
       .layout-1 {
@@ -450,8 +450,8 @@
             height: 16px;
             width: 16px;
 
-            padding: calc(#{base.$mobile_items_padding} * 0.2);
-            margin: calc(#{base.$mobile_items_padding} * 0.8);
+            padding: calc(#{base.$mobile_selectable_items_padding} * 0.2);
+            margin: calc(#{base.$mobile_selectable_items_padding} * 0.8);
           }
 
           .items-container {
@@ -467,7 +467,7 @@
               }
 
               .item {
-                padding: base.$mobile_items_padding;
+                padding: base.$mobile_selectable_items_padding;
                 font-size: 0;
               }
             }
@@ -498,7 +498,7 @@
 
   }
 
-  @media (max-width: 319px), (max-height: 319px)  {
+  @media (max-width: 319px), (max-height: 319px) {
     * {
       display: none;
     }
