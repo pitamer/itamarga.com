@@ -26,22 +26,22 @@
       bottom: 0;
     }
 
-    background-color: base.$green_;
+    background-color: base.$green;
 
     &.blue {
-      background-color: base.$blue_;
+      background-color: base.$blue;
     }
 
     &.purple {
-      background-color: base.$purple_;
+      background-color: base.$purple;
     }
 
     &.red {
-      background-color: base.$red_;
+      background-color: base.$red;
     }
 
     &.yellow {
-      background-color: base.$yellow_;
+      background-color: base.$yellow;
     }
 
     &.tilted {
