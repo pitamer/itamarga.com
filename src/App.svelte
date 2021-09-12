@@ -373,7 +373,7 @@
       .layout-2 {
         .selected-item-slot {
           .selected-item {
-            margin: 10px 10px 0 10px;
+            margin: 10px 20px 0 10px;
 
             div {
               line-height: 22px;
@@ -386,6 +386,12 @@
     @media (max-height: 480px) {
       #app {
         font-size: 8px;
+      }
+    }
+
+    @media (min-height: 960px) {
+      #app {
+        font-size: 14px;
       }
     }
 
