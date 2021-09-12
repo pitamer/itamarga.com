@@ -321,7 +321,7 @@
         padding: 0 30px;
 
         .title-logo {
-          border: 1px white solid;
+          border: 1px solid #fff;
           background-color: #223;
           width: 40px;
           height: 40px;
@@ -358,14 +358,14 @@
     }
   }
 
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  // tablets, landscape iPads, lo-res laptops and desktops
   @media (max-width: 1024px) {
     #app {
       font-size: 14px;
     }
   }
 
-  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  // portrait tablets, portrait iPads, landscape e-readers, landscape big smartphones
   @media (max-width: 960px)  {
     #app {
       font-size: 11px;
@@ -391,7 +391,7 @@
 
   }
 
-  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  // portrait e-readers, smaller tablets, smartphones
   @media (max-width: 640px)  {
     #app {
       font-size: 10px;
@@ -434,7 +434,7 @@
           display: flex;
           flex-flow: row;
 
-          box-shadow: 0 0 7px 5px black; // # Var needed
+          box-shadow: 0 0 7px 5px #000;
           z-index: 1;
 
           padding: 0;
@@ -492,15 +492,16 @@
 
   }
 
-  /* smartphones, iPhone, portrait 480x320 phones */
-  @media (max-width: 480px)  {
-
-  }
-
-  @media (max-width: 319px)  {
+  @media (max-width: 319px), (max-height: 319px)  {
     * {
-      outline: none;
       display: none;
+    }
+
+    #app::after {
+      content: "Hey! That's a pretty tiny screen you've got there! Mind trying a bigger one? :)";
+      font-size: 20px;
+      margin: 10px;
+      text-align: center;
     }
   }
 
