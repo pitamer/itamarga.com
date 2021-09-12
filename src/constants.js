@@ -17,7 +17,7 @@ export const INITIAL_MENU_ITEMS = [
         icon: "fas fa-info-circle",
         color: "blue",
         isSelectable: true,
-        isSelected: true,
+        isSelected: false,
         isLastSelected: false,
         textLines: [
             "<p>I'm Itamar Galili, a software developer.</p>",
@@ -67,7 +67,6 @@ export const INITIAL_MENU_ITEMS = [
         isSelected: false,
         isLastSelected: false,
         textLines: [
-            "<p>Let's connect!</p>",
             "<p>The best way to contact me is by email, at <a>itamarga@gmail.com</a>. I usually answer within a day.</p>",
             "<p>You can also try to reach me by my <a>Twitter</a> or <a>LinkedIn</a>.</p>",
             "<p>I promise I'll be friendly :)</p>",
