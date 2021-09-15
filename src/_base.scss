@@ -23,3 +23,17 @@ $mobile_selectable_items_padding: 10px;
   // Firefox
   scrollbar-width: none;
 }
+
+@mixin avatar {
+  background-color: #223;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  img {
+    width: 110%;
+    margin: -6% 8% 0 0;
+  }
+}
