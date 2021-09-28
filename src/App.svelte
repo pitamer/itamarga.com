@@ -1,17 +1,17 @@
 <script>
     import Line from './Line.svelte'
-    import { crossfade, fly } from 'svelte/transition';
-    import { cubicOut } from 'svelte/easing';
-    import { flip } from 'svelte/animate';
+    import {crossfade, fly} from 'svelte/transition';
+    import {cubicOut} from 'svelte/easing';
+    import {flip} from 'svelte/animate';
     import {
+        DEFAULT_FLY_POSITION_DIFFERENCE,
         DEFAULT_TRANSITION_DURATION,
+        INITIAL_MENU_ITEMS,
         LONG_DELAY_DURATION,
         SHORT_DELAY_DURATION,
-        WAVE_DELAY_BASE,
-        TOTAL_TEXT_LINES_TRANSITION_IN_DURATION,
-        DEFAULT_FLY_POSITION_DIFFERENCE,
         SMALL_FLY_POSITION_DIFFERENCE,
-        INITIAL_MENU_ITEMS,
+        TOTAL_TEXT_LINES_TRANSITION_IN_DURATION,
+        WAVE_DELAY_BASE,
     } from './constants'
 
     let menuItems = INITIAL_MENU_ITEMS
@@ -78,6 +78,7 @@
                     on:introend={setTransitioningFree}
                     on:outroend={setTransitioningFree}
                 >
+                    <img alt="avatar" src="./avatar.png" draggable="false" />
                 </div>
                 <div class="title-text">
                     <h1
@@ -134,6 +135,7 @@
                     in:receive="{{key: 'site-logo'}}"
                     out:send="{{key: 'site-logo'}}"
                 >
+                    <img alt="avatar" src="./avatar.png" draggable="false" />
                 </div>
                 <div class="items-container">
                     <div class="items-group top-group">
@@ -207,11 +209,17 @@
     margin: 0 auto;
     font-size: 16px;
 
-    .layout-1 {
+    .layout-1, .layout-2 {
+      width: 100%;
+      height: 100%;
       flex-grow: 1;
-      max-height: 80%;
-
       display: flex;
+    }
+
+    .layout-1 {
+      max-height: 80%;
+      position: absolute;
+
       flex-flow: column;
       justify-content: space-evenly;
 
@@ -221,13 +229,7 @@
         place-items: center;
 
         .title-logo {
-          border: 2px white solid;
-          background-color: #223;
-          //width: 175px;
-          //height: 175px;
-          width: 10em;
-          height: 10em;
-          border-radius: 50%;
+          @include base.avatar(10em, 2px);
         }
 
         .title-text {
@@ -236,15 +238,13 @@
           align-items: center;
 
           .title-text-top-row {
-            //font-size: 40px;
             font-size: 2.5em;
             margin: 20px 0 0 0;
           }
 
           .title-text-bottom-row {
-            //font-size: 30px;
             font-size: 1.9em;
-            margin: 15px 0 0    0;
+            margin: 15px 0 0 0;
           }
         }
       }
@@ -268,17 +268,8 @@
       }
     }
 
-    .layout-1, .layout-2 {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
     .layout-2 {
-      flex-grow: 1;
       max-height: 96%;
-
-      display: flex;
       position: relative;
 
       .selected-item-slot {
@@ -287,7 +278,6 @@
         grid-template-columns: 1fr;
         place-items: center;
         overflow-x: visible;
-
         @include base.completely-eliminate-desktop-scrollbars;
 
         .selected-item {
@@ -314,18 +304,13 @@
       .items-and-logo-container {
         display: flex;
         flex-flow: column;
-        // #
         min-width: 150px;
         max-width: 200px;
         justify-content: center;
         padding: 0 30px;
 
         .title-logo {
-          border: 1px solid #fff;
-          background-color: #223;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
+          @include base.avatar(40px, 1px);
           cursor: pointer;
           margin: 20px 2px;
         }
@@ -401,6 +386,7 @@
   @media (max-width: 640px) {
     #app {
       font-size: 10px;
+
       .layout-1 {
         .items-container {
           height: auto;
@@ -447,11 +433,9 @@
           margin: 0;
 
           .title-logo {
-            height: 16px;
-            width: 16px;
-
-            padding: calc(#{base.$mobile_selectable_items_padding} * 0.2);
-            margin: calc(#{base.$mobile_selectable_items_padding} * 0.8);
+            height: 20px;
+            width: 20px;
+            margin: base.$mobile_selectable_items_spacing;
           }
 
           .items-container {
@@ -467,7 +451,7 @@
               }
 
               .item {
-                padding: base.$mobile_selectable_items_padding;
+                padding: base.$mobile_selectable_items_spacing;
                 font-size: 0;
               }
             }
@@ -498,12 +482,15 @@
 
   }
 
+  // Devices that are outrageously tiny
   @media (max-width: 319px), (max-height: 319px) {
-    * {
+    #app * {
       display: none;
+      opacity: 0;
     }
 
     #app::after {
+      display: flex;
       content: "Hey! That's a pretty tiny screen you've got there! Mind trying a bigger one? :)";
       font-size: 20px;
       margin: 10px;

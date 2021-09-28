@@ -4,7 +4,7 @@ $purple:  #B05BFF;
 $red:     #f25a46;
 $yellow:  #fac840;
 
-$mobile_selectable_items_padding: 10px;
+$mobile_selectable_items_spacing: 10px;
 
 @mixin clickable-item {
   cursor: pointer;
@@ -24,16 +24,26 @@ $mobile_selectable_items_padding: 10px;
   scrollbar-width: none;
 }
 
-@mixin avatar {
-  background-color: #223;
+@mixin avatar($size, $border-width) {
+  background-color: #fff;
   border-radius: 50%;
+
+  border: $border-width white solid;
+
+  width: $size;
+  height: $size;
 
   display: grid;
   place-items: center;
   overflow: hidden;
+  user-select: none;
 
   img {
-    width: 110%;
-    margin: -6% 8% 0 0;
+    width: 122%;
+    margin: -12% 8% 0 0;
+
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    user-drag: none;
   }
 }
