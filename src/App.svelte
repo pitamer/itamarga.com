@@ -78,7 +78,7 @@
                     on:introend={setTransitioningFree}
                     on:outroend={setTransitioningFree}
                 >
-                    <img alt="avatar" src="./avatar.png" draggable="false" />
+                    <img alt="avatar" src="./avatar.svg" draggable="false" />
                 </div>
                 <div class="title-text">
                     <h1
@@ -135,7 +135,7 @@
                     in:receive="{{key: 'site-logo'}}"
                     out:send="{{key: 'site-logo'}}"
                 >
-                    <img alt="avatar" src="./avatar.png" draggable="false" />
+                    <img alt="avatar" src="./avatar.svg" draggable="false" />
                 </div>
                 <div class="items-container">
                     <div class="items-group top-group">
@@ -310,7 +310,7 @@
         padding: 0 30px;
 
         .title-logo {
-          @include base.avatar(40px, 1px);
+          @include base.avatar(50px, 1px);
           cursor: pointer;
           margin: 20px 2px;
         }
@@ -482,7 +482,7 @@
 
   }
 
-  // Devices that are outrageously tiny
+  // Devices that are outrageously small
   @media (max-width: 319px), (max-height: 319px) {
     #app * {
       display: none;
