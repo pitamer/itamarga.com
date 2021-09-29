@@ -21,7 +21,7 @@ export const INITIAL_MENU_ITEMS = [
         isLastSelected: false,
         textLines: [
             "<p>I'm Itamar Galili, a software developer.</p>",
-            "<p>I work for <a href='https://www.codicate.com/' target='_blank' rel='noopener noreferrer'>Codicate</a>. Before that, I worked for <a href='https://www.tsgitsystems.com/' target='_blank' rel='noopener noreferrer'>TSG</a>.</p>",
+            "<p>I work for <a href='https://www.codicate.com/' target='_blank' rel='noopener noreferrer'>Control</a>. Before that, I worked for <a href='https://www.tsgitsystems.com/' target='_blank' rel='noopener noreferrer'>TSG</a>.</p>",
             "<p>An autodidact programmer, I initially learned to code with <a href='https://ocw.mit.edu/' target='_blank' rel='noopener noreferrer'>MIT OCW</a> and other resources. Since then I continuously learn anything that there is to be learned. It’s most of what I do in my free time.</p>",
             "<p>Well, either that or climbing.</p>",
             "<p>I’m primarily experienced in full stack web development, but I’m prepared to tackle any challenge. Learning new stuff is my main thing.</p>",
@@ -37,11 +37,11 @@ export const INITIAL_MENU_ITEMS = [
         isLastSelected: false,
         textLines: [
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I used to be a team lead and a product manager.</strong></p>",
-            "<p>from 2016 to 2018, I served as an intelligence team lead and then as a software product manager in <a href='https://en.wikipedia.org/wiki/Unit_8200' target='_blank' rel='noopener noreferrer'>unit 8200</a>. It was amazing, but it also made me realize that I enjoy creating more than I do directing.</p>",
+            "<p>from 2014 to 2018, I served as an intelligence analyst turned team lead and then as a software product manager in <a href='https://en.wikipedia.org/wiki/Unit_8200' target='_blank' rel='noopener noreferrer'>unit 8200</a>. It was amazing, but it also made me realize that I enjoy creating more than I do directing.</p>",
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I created automation scripts for ML training data collection.</strong></p>",
             "<p>from 2019 to 2020, I worked at <a href='https://www.tsgitsystems.com/' target='_blank' rel='noopener noreferrer'>TSG</a>, in my debut as a developer. My team and I conceived, designed and built elegant internal solutions for data collection and curation. I loved every minute of it.</p>",
             "<p style='padding-top: 10px; margin-bottom: -7px;'><strong>I developed intricate, multifaceted web and mobile apps.</strong></p>",
-            "<p>Since late 2020, I've been working as a full-stack developer at <a>Control</a>, where we take on revolutionizing the construction industry. I take part in the development of a multiplex product - web and mobile, front to back - used by hundreds of users daily.</p>",
+            "<p>Since late 2020, I've been working as a full-stack developer at <a href='https://www.codicate.com/' target='_blank' rel='noopener noreferrer'>Control</a>, where we take on revolutionizing the construction industry. I take part in the development of a multiplex product - web and mobile, front to back - used by hundreds of users daily.</p>",
         ],
     },
     {
@@ -67,7 +67,7 @@ export const INITIAL_MENU_ITEMS = [
         isSelected: false,
         isLastSelected: false,
         textLines: [
-            "<p>The best way to contact me is by email, at <a>itamarga@gmail.com</a>. I usually answer within a day.</p>",
+            "<p>The best way to contact me is by email, at <a href=mailto:itamarga@gmail.com>itamarga@gmail.com</a>. I usually answer within a day.</p>",
             "<p>You can also try to reach me by my <a>Twitter</a> or <a>LinkedIn</a>.</p>",
             "<p>I promise I'll be friendly :)</p>",
         ],
