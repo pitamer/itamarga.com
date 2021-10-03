@@ -1,16 +1,39 @@
-export const DEFAULT_TRANSITION_DURATION = 750
+export const DEFAULT_TRANSITION_DURATION: number = 750
 
-export const LONG_DELAY_DURATION = 500
-export const SHORT_DELAY_DURATION = 75
-export const WAVE_DELAY_BASE = 35
+export const LONG_DELAY_DURATION: number = 500
+export const SHORT_DELAY_DURATION: number = 75
+export const WAVE_DELAY_BASE: number = 35
 
-export const DEFAULT_FLY_POSITION_DIFFERENCE = 50
-export const SMALL_FLY_POSITION_DIFFERENCE = 25
+export const DEFAULT_FLY_POSITION_DIFFERENCE: number = 50
+export const SMALL_FLY_POSITION_DIFFERENCE: number = 25
 
-export const TOTAL_TEXT_LINES_TRANSITION_IN_DURATION = 300
+export const TOTAL_TEXT_LINES_TRANSITION_IN_DURATION: number = 300
 
 
-export const INITIAL_MENU_ITEMS = [
+interface ItemBase {
+    readonly id: number
+    readonly name: string
+    readonly icon: string
+    readonly isSelectable: boolean
+}
+
+interface SelectableItem extends ItemBase {
+    readonly isSelectable: true
+    isSelected: boolean
+    isLastSelected: boolean
+    readonly color: string
+    readonly textLines: string[]
+}
+
+interface NonSelectableItem extends ItemBase {
+    readonly isSelectable: false
+    readonly link: string
+}
+
+type Item = SelectableItem | NonSelectableItem
+
+
+export const INITIAL_MENU_ITEMS: Item[] = [
     {
         id: 1,
         name: "About me",
@@ -77,23 +100,27 @@ export const INITIAL_MENU_ITEMS = [
         name: "LinkedIn",
         icon: "fab fa-linkedin",
         isSelectable: false,
+        link: "https://www.linkedin.com/in/itamarga/",
     },
     {
         id: 6,
         name: "Twitter",
         icon: "fab fa-twitter",
         isSelectable: false,
+        link: "https://twitter.com/itamar_galili",
     },
     {
         id: 7,
         name: "StackOverflow",
         icon: "fab fa-stack-overflow",
         isSelectable: false,
+        link: "https://stackoverflow.com/users/14070872/pitamer",
     },
     {
         id: 8,
         name: "Github",
         icon: "fab fa-github",
         isSelectable: false,
+        link: "https://github.com/pitamer",
     },
 ]
