@@ -115,6 +115,9 @@
                     {#each nonSelectableItems as item (item.id)}
                     <a
                         class="item"
+                        href={item.link}
+                        target='_blank'
+                        rel='noopener noreferrer'
                         in:receive="{itemTransitionObject(item)}"
                         out:send="{itemTransitionObject(item)}"
                     >
@@ -155,6 +158,9 @@
                         {#each nonSelectableItems as item (item.id)}
                         <a
                             class="item"
+                            href={item.link}
+                            target='_blank'
+                            rel='noopener noreferrer'
                             in:receive="{itemTransitionObject(item)}"
                             out:send="{itemTransitionObject(item)}"
                             animate:flip={flipAnimationObject}
