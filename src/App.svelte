@@ -412,8 +412,6 @@
       }
 
       .layout-2 {
-        flex-flow: column-reverse;
-
         .selected-item-slot {
           overflow-X: hidden;
           overflow-y: scroll;
@@ -428,28 +426,23 @@
         }
 
         .items-and-logo-container {
-          max-width: 100%;
           display: flex;
-          flex-flow: row;
+          align-self: center;
 
-          box-shadow: 0 0 7px 5px #000;
-          z-index: 1;
+          min-width: 50px;
 
           padding: 0;
           margin: 0;
 
           .title-logo {
-            height: 20px;
-            width: 20px;
+            @include base.avatar(20px, 1px);
             margin: base.$mobile_selectable_items_spacing;
           }
 
           .items-container {
-            flex-flow: row;
             flex-grow: 1;
 
             .items-group {
-              flex-flow: row;
               justify-content: space-around;
 
               a {
