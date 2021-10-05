@@ -213,7 +213,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    font-size: 16px;
+    font-size: 14px;
 
     .layout-1, .layout-2 {
       width: 100%;
@@ -346,13 +346,6 @@
           }
         }
       }
-    }
-  }
-
-  // tablets, landscape iPads, lo-res laptops and desktops
-  @media (max-width: 1024px) {
-    #app {
-      font-size: 14px;
     }
   }
 
