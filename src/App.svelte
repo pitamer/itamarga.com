@@ -10,7 +10,7 @@
         LONG_DELAY_DURATION,
         SHORT_DELAY_DURATION,
         SMALL_FLY_POSITION_DIFFERENCE,
-        TOTAL_TEXT_LINES_TRANSITION_IN_DURATION,
+        TOTAL_TEXT_LINES_TRANSITION_DURATION,
         WAVE_DELAY_BASE,
     } from './constants'
 
@@ -186,8 +186,8 @@
                     <div>
                         {#each textLines as textLine, index (index)}
                             <div
-                                in:fly={{y: -SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_IN_DURATION / textLines.length) + LONG_DELAY_DURATION}}
-                                out:fly={{x: SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_IN_DURATION / textLines.length)}}
+                                in:fly={{y: -SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_DURATION / textLines.length) + LONG_DELAY_DURATION}}
+                                out:fly={{x: SMALL_FLY_POSITION_DIFFERENCE, delay: index * (TOTAL_TEXT_LINES_TRANSITION_DURATION / textLines.length)}}
                             >
                             {@html textLine}
                             </div>
