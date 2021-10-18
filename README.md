@@ -1,27 +1,49 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# My personal website
 
----
+<p align="center">
 
-# svelte app
+<img src="https://img.shields.io/badge/made%20by-pitamer-success.svg" >
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+<img src="https://awesome.re/badge.svg">
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+<img src="https://img.shields.io/badge/Open%20Source-♥-blue.svg" >
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+<img src="https://img.shields.io/badge/svelte-^3.0.0-FF3E00.svg">
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+<img src="https://img.shields.io/github/languages/top/pitamer/itamarga.com.svg?color=FF3E00">
+
+</p>
+
+This is the second iteration of my personal website. It's live on [itamarga.com](https://itamarga.com) since 3/10/2021.
+
+The old version's repo is [here](https://github.com/pitamer/itamarga.com_old) (was live 12/9/2020 - 3/10/2021).
+
+## Design and development
+
+Svelte seemed intriguing, so I started learning it.
+Somewhere along the [tutorial](https://svelte.dev/tutorial/basics) it became clear to me that I needed to make my new personal website with it.
+And use a ton of crossfades.
+
+So I went and made this wireframe with [Excalidraw](https://excalidraw.com):
+
+![Initial design sketch](./public/design_sketch.png)
+
+<sup><sub>
+The idea of the top and bottom decoration lines came from a specific scrolling point in the [Rocket](https://rocket.rs/) project homepage (You can spot it easily if it's still there).
+</sub></sup>
+
+The final result looks just a tiny bit different. I think I like it.
+
+## Intentionally uncopyrighted
+
+No permission is needed to copy, distribute or modify the content of this repo. Credit is appreciated but not required.
 
 
-## Get started
+## Project setup
 
 Install the dependencies...
 
 ```bash
-cd svelte-app
 npm install
 ```
 
@@ -31,13 +53,9 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Navigate to [localhost:5001](http://localhost:5001).
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
+### Building and running in production mode
 
 To create an optimised version of the app:
 
@@ -47,59 +65,6 @@ npm run build
 
 You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
 
+---
 
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+<h1 align="center">😄</h1>
