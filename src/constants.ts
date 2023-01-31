@@ -103,13 +103,6 @@ export const INITIAL_MENU_ITEMS: Item[] = [
         link: "https://www.linkedin.com/in/itamarga/",
     },
     {
-        id: 6,
-        name: "Twitter",
-        icon: "fab fa-twitter",
-        isSelectable: false,
-        link: "https://twitter.com/itamar_galili",
-    },
-    {
         id: 7,
         name: "StackOverflow",
         icon: "fab fa-stack-overflow",
