@@ -8,8 +8,6 @@
 
 <img src="https://img.shields.io/badge/Open%20Source-♥-blue.svg" >
 
-<img src="https://img.shields.io/badge/svelte-^3.0.0-FF3E00.svg">
-
 <img src="https://img.shields.io/github/languages/top/pitamer/itamarga.com.svg?color=FF3E00">
 
 </p>
